@@ -25,7 +25,9 @@ import io.bootique.junit5.BQTest;
 import io.bootique.junit5.BQTestFactory;
 import io.bootique.junit5.BQTestTool;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
+import java.nio.file.Path;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -51,11 +53,22 @@ public class DockerClientsIT {
     }
 
     @Test
-    public void testNamedClient() {
+    public void testNamedClient(@TempDir Path tempDir) {
 
         BQRuntime app = testFactory.app()
+                // provide just the URL
                 .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a.dockerHost", "tcp://example.org:2376"))
+
+                // provide all supported props
                 .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a1.dockerHost", "tcp://example.org:2378"))
+                .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a1.dockerTlsVerify", "true"))
+                .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a1.dockerCertPath", tempDir.toString()))
+                .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a1.apiVersion", "2.3556"))
+                .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a1.registryUrl", "https://example.org"))
+                .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a1.registryUserName", "xx"))
+                .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a1.registryPassword", "yy"))
+                .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a1.registryEmail", "a@example.org"))
+
                 .createRuntime();
 
         DockerClients clients = app.getInstance(DockerClients.class);
