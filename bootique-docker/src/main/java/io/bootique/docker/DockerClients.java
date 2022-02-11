@@ -69,13 +69,14 @@ public class DockerClients implements Closeable {
     @Override
     public void close() {
         clients.forEach(this::closeClient);
+        closeClient("_default_env_", envClient);
     }
 
     protected void closeClient(String name, DockerClient client) {
         try {
             client.close();
         } catch (IOException e) {
-            LOGGER.warn("Error closing Docker client, ignoring... {}", e.getMessage());
+            LOGGER.warn("Error closing Docker client '{}', ignoring: {}", name, e.getMessage());
         }
     }
 }

@@ -18,11 +18,14 @@
  */
 package io.bootique.docker;
 
+import com.github.dockerjava.api.DockerClient;
 import io.bootique.annotation.BQConfig;
 import io.bootique.annotation.BQConfigProperty;
 import io.bootique.shutdown.ShutdownManager;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @since 3.0.M1
@@ -31,21 +34,43 @@ import java.util.Collections;
 public class DockerClientsFactory {
 
     private EnvAwareDockerClientFactory envClient;
+    private Map<String, NoEnvDockerClientFactory> clients;
 
     public DockerClients createClients(ShutdownManager shutdownManager) {
-
-        EnvAwareDockerClientFactory envClientFactory = this.envClient != null
-                ? this.envClient
-                : new EnvAwareDockerClientFactory();
-
-        DockerClients clients = new DockerClients(Collections.emptyMap(), envClientFactory.createClient());
+        DockerClients clients = new DockerClients(createClients(), createEnvClient());
         shutdownManager.addShutdownHook(clients);
         return clients;
     }
 
-    @BQConfigProperty("Optional configuration for a default unnamed client instantiated from ")
+    protected DockerClient createEnvClient() {
+        EnvAwareDockerClientFactory envClientFactory = this.envClient != null
+                ? this.envClient
+                : new EnvAwareDockerClientFactory();
+        return envClientFactory.createClient();
+    }
+
+    protected Map<String, DockerClient> createClients() {
+
+        if (clients == null || clients.isEmpty()) {
+            return Collections.emptyMap();
+        }
+
+        Map<String, DockerClient> map = new HashMap<>();
+        clients.forEach((k, v) -> map.put(k, v.createClient()));
+
+        return map;
+    }
+
+    @BQConfigProperty("Optional transport configuration for a default unnamed client instantiated from the environment " +
+            "properties recognized by Docker Client")
     public DockerClientsFactory setEnvClient(EnvAwareDockerClientFactory envClient) {
         this.envClient = envClient;
+        return this;
+    }
+
+    @BQConfigProperty("A map of named client configurations")
+    public DockerClientsFactory setClients(Map<String, NoEnvDockerClientFactory> clients) {
+        this.clients = clients;
         return this;
     }
 }

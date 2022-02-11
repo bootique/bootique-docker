@@ -19,14 +19,16 @@
 package io.bootique.docker;
 
 import com.github.dockerjava.api.DockerClient;
+import io.bootique.BQCoreModule;
 import io.bootique.BQRuntime;
 import io.bootique.junit5.BQTest;
 import io.bootique.junit5.BQTestFactory;
 import io.bootique.junit5.BQTestTool;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 @BQTest
 public class DockerClientsIT {
@@ -35,7 +37,7 @@ public class DockerClientsIT {
     static final BQTestFactory testFactory = new BQTestFactory().autoLoadModules();
 
     @Test
-    public void testZeroConfig() {
+    public void testEnvClientZeroConfig() {
 
         BQRuntime app = testFactory.app().createRuntime();
         DockerClients clients = app.getInstance(DockerClients.class);
@@ -46,5 +48,21 @@ public class DockerClientsIT {
         assertNotNull(client);
 
         client.pingCmd().exec();
+    }
+
+    @Test
+    public void testNamedClient() {
+
+        BQRuntime app = testFactory.app()
+                .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a.dockerHost", "tcp://example.org:2376"))
+                .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a1.dockerHost", "tcp://example.org:2378"))
+                .createRuntime();
+
+        DockerClients clients = app.getInstance(DockerClients.class);
+
+        assertEquals(Set.of("a", "a1"), clients.getClientNames());
+
+        assertNotNull(clients.getClient("a"));
+        assertNotNull(clients.getClient("a1"));
     }
 }

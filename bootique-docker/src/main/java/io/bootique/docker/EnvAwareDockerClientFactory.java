@@ -18,55 +18,20 @@
  */
 package io.bootique.docker;
 
-import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientConfig;
-import com.github.dockerjava.core.DockerClientImpl;
-import com.github.dockerjava.transport.DockerHttpClient;
-import com.github.dockerjava.zerodep.ZerodepDockerHttpClient;
 import io.bootique.annotation.BQConfig;
-import io.bootique.annotation.BQConfigProperty;
-import io.bootique.value.Duration;
 
 /**
  * @since 3.0.M1
  */
 @BQConfig
-public class EnvAwareDockerClientFactory {
+public class EnvAwareDockerClientFactory extends HttpTransportDockerClientFactory {
 
-    private Integer maxConnections;
-    private Duration connectionTimeout;
-    private Duration responseTimeout;
-
-    public DockerClient createClient() {
-        DockerClientConfig envConfig = DefaultDockerClientConfig.createDefaultConfigBuilder().build();
-        DockerHttpClient envHttpClient = new ZerodepDockerHttpClient.Builder().dockerHost(envConfig.getDockerHost())
-                .sslConfig(envConfig.getSSLConfig())
-
-                // TODO: make configurable properties
-                .maxConnections(maxConnections != null ? maxConnections : 100)
-                .connectionTimeout(connectionTimeout != null ? connectionTimeout.getDuration() : java.time.Duration.ofSeconds(30))
-                .responseTimeout(responseTimeout != null ? responseTimeout.getDuration() : java.time.Duration.ofSeconds(30))
-                .build();
-
-        return DockerClientImpl.getInstance(envConfig, envHttpClient);
-    }
-
-    @BQConfigProperty("HTTP transport max connections. The default is 100")
-    public EnvAwareDockerClientFactory setMaxConnections(Integer maxConnections) {
-        this.maxConnections = maxConnections;
-        return this;
-    }
-
-    @BQConfigProperty("HTTP transport connection timeout. The default is 30 seconds")
-    public EnvAwareDockerClientFactory setConnectionTimeout(Duration connectionTimeout) {
-        this.connectionTimeout = connectionTimeout;
-        return this;
-    }
-
-    @BQConfigProperty("HTTP transport response timeout. The default is 30 seconds")
-    public EnvAwareDockerClientFactory setResponseTimeout(Duration responseTimeout) {
-        this.responseTimeout = responseTimeout;
-        return this;
+    @Override
+    protected DockerClientConfig createConfig() {
+        // this will load various env properties per
+        // https://github.com/docker-java/docker-java/blob/master/docs/getting_started.md#instantiating-a-dockerclientconfig
+        return DefaultDockerClientConfig.createDefaultConfigBuilder().build();
     }
 }
