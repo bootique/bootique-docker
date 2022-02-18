@@ -53,6 +53,23 @@ public class DockerClientsIT {
     }
 
     @Test
+    public void testNamedClient_Env(@TempDir Path tempDir) {
+
+        BQRuntime app = testFactory.app()
+                .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a.type", "env"))
+                .createRuntime();
+
+        DockerClients clients = app.getInstance(DockerClients.class);
+
+        assertEquals(Set.of("a"), clients.getClientNames());
+
+        DockerClient client = clients.getClient("a");
+        assertNotNull(client);
+
+        client.pingCmd().exec();
+    }
+
+    @Test
     public void testNamedClient(@TempDir Path tempDir) {
 
         BQRuntime app = testFactory.app()

@@ -2,4 +2,4 @@
 
 * #1 Env-based client
 * #2 Named clients
-
+* #3 Allow named clients to be configured from environment

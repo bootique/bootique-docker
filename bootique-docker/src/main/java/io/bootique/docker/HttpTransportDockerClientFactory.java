@@ -18,6 +18,7 @@
  */
 package io.bootique.docker;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.github.dockerjava.api.DockerClient;
 import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.core.DockerClientImpl;
@@ -25,6 +26,7 @@ import com.github.dockerjava.transport.DockerHttpClient;
 import com.github.dockerjava.transport.SSLConfig;
 import com.github.dockerjava.zerodep.ZerodepDockerHttpClient;
 import io.bootique.annotation.BQConfigProperty;
+import io.bootique.config.PolymorphicConfiguration;
 import io.bootique.value.Duration;
 
 import java.net.URI;
@@ -32,7 +34,8 @@ import java.net.URI;
 /**
  * @since 3.0.M1
  */
-public abstract class HttpTransportDockerClientFactory {
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", defaultImpl = NoEnvDockerClientFactory.class)
+public abstract class HttpTransportDockerClientFactory implements PolymorphicConfiguration {
 
     protected Integer maxConnections;
     protected Duration connectionTimeout;

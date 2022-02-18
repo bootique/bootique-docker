@@ -34,7 +34,7 @@ import java.util.Map;
 public class DockerClientsFactory {
 
     private EnvAwareDockerClientFactory envClient;
-    private Map<String, NoEnvDockerClientFactory> clients;
+    private Map<String, HttpTransportDockerClientFactory> clients;
 
     public DockerClients createClients(ShutdownManager shutdownManager) {
         DockerClients clients = new DockerClients(createClients(), createEnvClient());
@@ -69,7 +69,7 @@ public class DockerClientsFactory {
     }
 
     @BQConfigProperty("A map of named client configurations")
-    public DockerClientsFactory setClients(Map<String, NoEnvDockerClientFactory> clients) {
+    public DockerClientsFactory setClients(Map<String, HttpTransportDockerClientFactory> clients) {
         this.clients = clients;
         return this;
     }

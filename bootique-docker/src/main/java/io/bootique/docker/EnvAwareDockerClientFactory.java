@@ -18,6 +18,7 @@
  */
 package io.bootique.docker;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientConfig;
 import io.bootique.annotation.BQConfig;
@@ -26,6 +27,7 @@ import io.bootique.annotation.BQConfig;
  * @since 3.0.M1
  */
 @BQConfig
+@JsonTypeName("env")
 public class EnvAwareDockerClientFactory extends HttpTransportDockerClientFactory {
 
     @Override

@@ -18,6 +18,7 @@
  */
 package io.bootique.docker;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientConfig;
 import io.bootique.annotation.BQConfig;
@@ -30,6 +31,7 @@ import java.util.Objects;
  * @since 3.0.M1
  */
 @BQConfig
+@JsonTypeName("noenv")
 public class NoEnvDockerClientFactory extends HttpTransportDockerClientFactory {
 
     private String dockerHost;
@@ -57,7 +59,7 @@ public class NoEnvDockerClientFactory extends HttpTransportDockerClientFactory {
                 .build();
     }
 
-    @BQConfigProperty
+    @BQConfigProperty("Docker host URI, e.g. tcp://example.org:2378")
     public NoEnvDockerClientFactory setDockerHost(String dockerHost) {
         this.dockerHost = dockerHost;
         return this;
