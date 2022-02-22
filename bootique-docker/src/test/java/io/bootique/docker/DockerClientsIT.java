@@ -53,7 +53,7 @@ public class DockerClientsIT {
     }
 
     @Test
-    public void testNamedClient_Env(@TempDir Path tempDir) {
+    public void testNamedClient_Env() {
 
         BQRuntime app = testFactory.app()
                 .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a.type", "env"))
