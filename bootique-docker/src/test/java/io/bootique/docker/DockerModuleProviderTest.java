@@ -27,4 +27,10 @@ public class DockerModuleProviderTest {
     public void testAutoLoading() {
         BQModuleProviderChecker.testAutoLoadable(DockerModuleProvider.class);
     }
+
+    @Test
+    public void testMetadata() {
+        BQModuleProviderChecker.testMetadata(DockerModuleProvider.class);
+    }
+
 }
