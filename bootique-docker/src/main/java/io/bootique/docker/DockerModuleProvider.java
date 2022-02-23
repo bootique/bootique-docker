@@ -19,6 +19,7 @@
 package io.bootique.docker;
 
 import io.bootique.BQModuleProvider;
+import io.bootique.BQModuleMetadata.Builder;
 import io.bootique.di.BQModule;
 
 import java.lang.reflect.Type;
@@ -38,5 +39,11 @@ public class DockerModuleProvider implements BQModuleProvider {
     @Override
     public BQModule module() {
         return new DockerModule();
+    }
+
+    @Override
+    public Builder moduleBuilder() {
+        return BQModuleProvider.super.moduleBuilder()
+                .description("Provides integration with Java Docker Client library.");
     }
 }
