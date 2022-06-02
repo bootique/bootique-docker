@@ -59,7 +59,7 @@ public class NoEnvDockerClientFactory extends HttpTransportDockerClientFactory {
                 .build();
     }
 
-    @BQConfigProperty("Docker host URI, e.g. tcp://example.org:2378")
+    @BQConfigProperty("Docker host URI, e.g. 'unix:///var/run/docker.sock' or 'tcp://example.org:2378'")
     public NoEnvDockerClientFactory setDockerHost(String dockerHost) {
         this.dockerHost = dockerHost;
         return this;
