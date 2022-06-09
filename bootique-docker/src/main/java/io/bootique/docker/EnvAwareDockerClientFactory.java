@@ -26,7 +26,7 @@ import io.bootique.annotation.BQConfig;
 /**
  * @since 3.0.M1
  */
-@BQConfig
+@BQConfig("Builds a DockerClient from the surrounding environment properties as specified in the Docker Client docs")
 @JsonTypeName("env")
 public class EnvAwareDockerClientFactory extends HttpTransportDockerClientFactory {
 
