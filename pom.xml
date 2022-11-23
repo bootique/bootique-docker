@@ -40,7 +40,7 @@
     <properties>
         <bootique.version>${project.version}</bootique.version>
         <!-- Generally  should be in sync with testcontainers version Docker client dependency -->
-        <docker.client.version>3.2.14</docker.client.version>
+        <docker.client.version>3.2.13</docker.client.version>
     </properties>
 
     <scm>
