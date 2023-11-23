@@ -39,7 +39,7 @@ public class DockerClientsIT {
     static final BQTestFactory testFactory = new BQTestFactory().autoLoadModules();
 
     @Test
-    public void testEnvClientZeroConfig() {
+    public void envClientZeroConfig() {
 
         BQRuntime app = testFactory.app().createRuntime();
         DockerClients clients = app.getInstance(DockerClients.class);
@@ -53,7 +53,7 @@ public class DockerClientsIT {
     }
 
     @Test
-    public void testNamedClient_Env() {
+    public void namedClient_Env() {
 
         BQRuntime app = testFactory.app()
                 .module(b -> BQCoreModule.extend(b).setProperty("bq.docker.clients.a.type", "env"))
@@ -70,7 +70,7 @@ public class DockerClientsIT {
     }
 
     @Test
-    public void testNamedClient(@TempDir Path tempDir) {
+    public void namedClient(@TempDir Path tempDir) {
 
         BQRuntime app = testFactory.app()
                 // provide just the URL

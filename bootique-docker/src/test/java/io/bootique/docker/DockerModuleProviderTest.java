@@ -24,12 +24,12 @@ import org.junit.jupiter.api.Test;
 public class DockerModuleProviderTest {
 
     @Test
-    public void testAutoLoading() {
+    public void autoLoading() {
         BQModuleProviderChecker.testAutoLoadable(DockerModuleProvider.class);
     }
 
     @Test
-    public void testMetadata() {
+    public void metadata() {
         BQModuleProviderChecker.testMetadata(DockerModuleProvider.class);
     }
 
