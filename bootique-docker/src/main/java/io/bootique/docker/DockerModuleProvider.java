@@ -19,31 +19,19 @@
 package io.bootique.docker;
 
 import io.bootique.BQModuleProvider;
-import io.bootique.BQModuleMetadata.Builder;
-import io.bootique.di.BQModule;
-
-import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.Map;
+import io.bootique.bootstrap.BuiltModule;
 
 /**
- * @since 3.0.M1
+ * @since 3.0
  */
 public class DockerModuleProvider implements BQModuleProvider {
 
     @Override
-    public Map<String, Type> configs() {
-        return Collections.singletonMap("docker", DockerClientsFactory.class);
-    }
-
-    @Override
-    public BQModule module() {
-        return new DockerModule();
-    }
-
-    @Override
-    public Builder moduleBuilder() {
-        return BQModuleProvider.super.moduleBuilder()
-                .description("Provides integration with Java Docker Client library.");
+    public BuiltModule buildModule() {
+        return BuiltModule.of(new DockerModule())
+                .provider(this)
+                .description("Integrates Docker client library")
+                .config("docker", DockerClientsFactory.class)
+                .build();
     }
 }
