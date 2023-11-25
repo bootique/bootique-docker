@@ -24,7 +24,7 @@ import com.github.dockerjava.core.DockerClientConfig;
 import io.bootique.annotation.BQConfig;
 
 /**
- * @since 3.0.M1
+ * @since 3.0
  */
 @BQConfig("Builds a DockerClient from the surrounding environment properties as specified in the Docker Client docs")
 @JsonTypeName("env")

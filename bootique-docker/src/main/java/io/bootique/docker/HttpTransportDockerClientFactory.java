@@ -34,7 +34,7 @@ import io.bootique.value.Duration;
 import java.net.URI;
 
 /**
- * @since 3.0.M1
+ * @since 3.0
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", defaultImpl = NoEnvDockerClientFactory.class)
 @BQConfig("Configures Docker clients, providing injectable DockerClients object.")

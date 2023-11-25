@@ -26,7 +26,7 @@ import io.bootique.shutdown.ShutdownManager;
 import javax.inject.Singleton;
 
 /**
- * @since 3.0.M1
+ * @since 3.0
  */
 public class DockerModule extends ConfigModule {
 

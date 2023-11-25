@@ -28,7 +28,7 @@ import java.io.File;
 import java.util.Objects;
 
 /**
- * @since 3.0.M1
+ * @since 3.0
  */
 @BQConfig
 @JsonTypeName("noenv")

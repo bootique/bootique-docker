@@ -30,7 +30,7 @@ import java.util.Set;
 /**
  * A map of preconfigured named Docker clients
  *
- * @since 3.0.M1
+ * @since 3.0
  */
 public class DockerClients implements Closeable {
 
