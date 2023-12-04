@@ -18,10 +18,9 @@
  */
 package io.bootique.docker;
 
-import io.bootique.BQModuleProvider;
 import io.bootique.ModuleCrate;
 import io.bootique.config.ConfigurationFactory;
-import io.bootique.di.BQModule;
+import io.bootique.BQModule;
 import io.bootique.di.Binder;
 import io.bootique.di.Provides;
 import io.bootique.shutdown.ShutdownManager;
@@ -31,14 +30,13 @@ import javax.inject.Singleton;
 /**
  * @since 3.0
  */
-public class DockerModule implements BQModule, BQModuleProvider {
+public class DockerModule implements BQModule {
 
     private static final String CONFIG_PREFIX = "docker";
 
     @Override
-    public ModuleCrate moduleCrate() {
+    public ModuleCrate crate() {
         return ModuleCrate.of(this)
-                .provider(this)
                 .description("Integrates Docker client library")
                 .config(CONFIG_PREFIX, DockerClientsFactory.class)
                 .build();
@@ -46,7 +44,6 @@ public class DockerModule implements BQModule, BQModuleProvider {
 
     @Override
     public void configure(Binder binder) {
-
     }
 
     @Singleton

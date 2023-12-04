@@ -18,19 +18,13 @@
  */
 package io.bootique.docker;
 
-import io.bootique.junit5.BQModuleProviderChecker;
+import io.bootique.junit5.BQModuleTester;
 import org.junit.jupiter.api.Test;
 
 public class DockerModuleTest {
 
     @Test
-    public void autoLoading() {
-        BQModuleProviderChecker.testAutoLoadable(DockerModule.class);
+    public void check() {
+        BQModuleTester.of(DockerModule.class).testAutoLoadable().testConfig();
     }
-
-    @Test
-    public void metadata() {
-        BQModuleProviderChecker.testMetadata(DockerModule.class);
-    }
-
 }
