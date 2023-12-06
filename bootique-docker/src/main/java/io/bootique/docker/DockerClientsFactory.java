@@ -37,9 +37,7 @@ public class DockerClientsFactory {
     private Map<String, HttpTransportDockerClientFactory> clients;
 
     public DockerClients createClients(ShutdownManager shutdownManager) {
-        DockerClients clients = new DockerClients(createClients(), createEnvClient());
-        shutdownManager.addShutdownHook(clients);
-        return clients;
+        return shutdownManager.onShutdown(new DockerClients(createClients(), createEnvClient()));
     }
 
     protected DockerClient createEnvClient() {
