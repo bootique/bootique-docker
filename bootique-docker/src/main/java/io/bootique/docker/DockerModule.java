@@ -18,12 +18,11 @@
  */
 package io.bootique.docker;
 
+import io.bootique.BQModule;
 import io.bootique.ModuleCrate;
 import io.bootique.config.ConfigurationFactory;
-import io.bootique.BQModule;
 import io.bootique.di.Binder;
 import io.bootique.di.Provides;
-import io.bootique.shutdown.ShutdownManager;
 
 import javax.inject.Singleton;
 
@@ -48,7 +47,7 @@ public class DockerModule implements BQModule {
 
     @Singleton
     @Provides
-    DockerClients provideClients(ConfigurationFactory configFactory, ShutdownManager shutdownManager) {
-        return configFactory.config(DockerClientsFactory.class, CONFIG_PREFIX).createClients(shutdownManager);
+    DockerClients provideClients(ConfigurationFactory configFactory) {
+        return configFactory.config(DockerClientsFactory.class, CONFIG_PREFIX).create();
     }
 }

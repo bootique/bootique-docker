@@ -23,6 +23,7 @@ import io.bootique.annotation.BQConfig;
 import io.bootique.annotation.BQConfigProperty;
 import io.bootique.shutdown.ShutdownManager;
 
+import javax.inject.Inject;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,10 +34,17 @@ import java.util.Map;
 @BQConfig
 public class DockerClientsFactory {
 
+    private final ShutdownManager shutdownManager;
+
     private EnvAwareDockerClientFactory envClient;
     private Map<String, HttpTransportDockerClientFactory> clients;
 
-    public DockerClients createClients(ShutdownManager shutdownManager) {
+    @Inject
+    public DockerClientsFactory(ShutdownManager shutdownManager) {
+        this.shutdownManager = shutdownManager;
+    }
+
+    public DockerClients create() {
         return shutdownManager.onShutdown(new DockerClients(createClients(), createEnvClient()));
     }
 
