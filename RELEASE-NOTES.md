@@ -1,3 +1,7 @@
+## 3.0-M4
+
+* #8 upgrade to Docker client 3.3.6
+
 ## 3.0.M2
 
 * #7 Upgrade Docker client to 3.3.3
