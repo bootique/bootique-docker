@@ -40,7 +40,7 @@
     <properties>
         <bootique.version>${project.version}</bootique.version>
         <!-- Generally  should be in sync with testcontainers version Docker client dependency -->
-        <docker.client.version>3.3.6</docker.client.version>
+        <docker.client.version>3.4.0</docker.client.version>
         <commons.compress.version>1.26.1</commons.compress.version>
         <guava.version>33.1.0-jre</guava.version>
     </properties>

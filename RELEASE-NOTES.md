@@ -1,3 +1,7 @@
+## 3.0-M5
+
+* #9 Upgrade to docker-java-core 3.4.0
+
 ## 3.0-M4
 
 * #8 upgrade to Docker client 3.3.6
