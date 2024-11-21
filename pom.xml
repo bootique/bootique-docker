@@ -38,7 +38,6 @@
     </modules>
 
     <properties>
-        <bootique.version>${project.version}</bootique.version>
         <!-- Generally  should be in sync with testcontainers version Docker client dependency -->
         <docker.client.version>3.4.0</docker.client.version>
         <commons.compress.version>1.26.1</commons.compress.version>
@@ -56,12 +55,12 @@
             <dependency>
                 <groupId>io.bootique</groupId>
                 <artifactId>bootique</artifactId>
-                <version>${bootique.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.bootique</groupId>
                 <artifactId>bootique-junit5</artifactId>
-                <version>${bootique.version}</version>
+                <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.docker-java</groupId>
