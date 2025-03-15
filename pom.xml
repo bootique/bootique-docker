@@ -39,9 +39,10 @@
 
     <properties>
         <!-- Generally  should be in sync with testcontainers version Docker client dependency -->
-        <docker.client.version>3.4.0</docker.client.version>
+        <docker.client.version>3.4.1</docker.client.version>
         <commons.compress.version>1.26.1</commons.compress.version>
         <guava.version>33.1.0-jre</guava.version>
+        <commons.lang.version>3.17.0</commons.lang.version>
     </properties>
 
     <scm>
@@ -80,6 +81,10 @@
                         <artifactId>commons-compress</artifactId>
                     </exclusion>
                     <exclusion>
+                        <groupId>org.apache.commons</groupId>
+                        <artifactId>commons-lang3</artifactId>
+                    </exclusion>
+                    <exclusion>
                         <groupId>com.google.guava</groupId>
                         <artifactId>guava</artifactId>
                     </exclusion>
@@ -95,6 +100,11 @@
                         <artifactId>*</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons.lang.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>

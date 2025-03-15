@@ -1,3 +1,7 @@
+## 3.0-RC1
+
+* #10 Upgrade to "docker-java-core" 3.4.1
+
 ## 3.0-M6
 
 * #9 Upgrade to docker-java-core 3.4.0
