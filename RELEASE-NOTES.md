@@ -1,3 +1,7 @@
+## 3.0-RC2
+
+* #11 Bump org.apache.commons:commons-lang3 from 3.17.0 to 3.18.0
+
 ## 3.0-RC1
 
 * #10 Upgrade to "docker-java-core" 3.4.1
