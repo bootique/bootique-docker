@@ -39,7 +39,7 @@
 
     <properties>
         <!-- Generally should be in sync with the Testcontainers version of the Docker client dependency -->
-        <docker.client.version>3.4.1</docker.client.version>
+        <docker.client.version>3.4.2</docker.client.version>
         <commons.compress.version>1.26.1</commons.compress.version>
         <guava.version>33.4.8-jre</guava.version>
         <commons.lang.version>3.18.0</commons.lang.version>
