@@ -1,3 +1,7 @@
+## 4.0-M3
+
+* #14 Upgrade to docker-java-api 3.7.0 
+
 ## 4.0-M2
 
 * #12 Upgrade to docker-java 3.4.2
