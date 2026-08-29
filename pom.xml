@@ -44,6 +44,7 @@
         <guava.version>33.4.8-jre</guava.version>
         <commons.lang.version>3.20.0</commons.lang.version>
         <commons.io.version>2.21.0</commons.io.version>
+        <bouncycastle.version>1.84</bouncycastle.version>
     </properties>
 
     <scm>
@@ -89,7 +90,16 @@
                         <groupId>com.google.guava</groupId>
                         <artifactId>guava</artifactId>
                     </exclusion>
+                    <exclusion>
+                        <groupId>org.bouncycastle</groupId>
+                        <artifactId>*</artifactId>
+                    </exclusion>
                 </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk18on</artifactId>
+                <version>${bouncycastle.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.docker-java</groupId>
