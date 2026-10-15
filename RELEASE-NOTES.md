@@ -1,3 +1,7 @@
+## 4.0-M7
+
+* #15 Upgrade docker-java to 3.7.1 to align with Testcontainers 2.0.5
+
 ## 4.0-M3
 
 * #14 Upgrade to docker-java-api 3.7.0 
